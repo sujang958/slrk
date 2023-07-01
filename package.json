@@ -1,0 +1,16 @@
+{
+  "name": "slrk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/sujang958/slrk.git",
+  "author": "sujang958 <enter7377@naver.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.3.3",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "youtube-notify": "^2.0.2"
+  }
+}
