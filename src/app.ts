@@ -1,22 +1,39 @@
 import Notifier from "youtube-notify"
+import { Client } from "discord.js"
+import { config } from "dotenv"
 
-// Options
+config()
+
+const CHANNEL_ID = process.env.CHANNEL_ID ?? "1125392783419650078"
+const CALLBACK_URL = process.env.CALLBACK_URL
+
+if (!CALLBACK_URL) process.exit(404)
+
 const notifier = new Notifier({
-  hubCallback: "https://example.com/youtube",
+  hubCallback: CALLBACK_URL,
   port: 8080,
-  secret: "Something",
-  path: "/youtube",
 })
-// Setup
-notifier.setup()
-// Notification
-notifier.on("notified", (data) => {
-  console.log("New Video")
-  console.log(
-    `${data.channel.name} just uploaded a new video titled: ${data.video.title}`
-  )
-})
-// Subscription
-notifier.subscribe("CHANNEL_ID") // String
-notifier.subscribe(["CHANNEL_ID1", "CHANNEL_ID2"]) // Array
 
+const client = new Client({
+  intents: [130815],
+})
+
+notifier.on("notified", async ({ video }) => {
+  const channel = await client.channels.fetch(CHANNEL_ID)
+  console.log(channel?.id, video)
+  if (!channel?.isTextBased()) return
+  channel.send(`@everyone Here comes a new video!\n${video.link}`)
+})
+
+client.on("ready", async (preparedClient) => {
+  console.log("Logged in as", preparedClient.user.tag)
+})
+
+client.login(process.env.BOT_TOKEN)
+
+notifier.subscribe("UCsln5HVCdbSkGGIoQ9Uoc3A")
+notifier.setup()
+
+process.on("uncaughtException", (error) => {
+  console.log("Error", error)
+})

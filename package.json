@@ -7,10 +7,12 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.3.3",
+    "prettier": "^2.8.8",
     "typescript": "^5.1.6"
   },
   "dependencies": {
     "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1",
     "youtube-notify": "^2.0.2"
   }
 }
