@@ -1,10 +1,14 @@
 {
   "name": "slrk",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "out/app.js",
   "repository": "https://github.com/sujang958/slrk.git",
   "author": "sujang958 <enter7377@naver.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./out/app"
+  },
   "devDependencies": {
     "@types/node": "^20.3.3",
     "prettier": "^2.8.8",
